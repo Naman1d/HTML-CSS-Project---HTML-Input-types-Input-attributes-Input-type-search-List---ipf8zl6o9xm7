@@ -1,3 +1,4 @@
+
 const input = document.querySelectorAll('.otp-input');
 // console.log(input)
 
@@ -31,4 +32,4 @@ function moveFocusToPreviousInput(eventOrigination) {
     }
 
     input[eventOrigination - 1].focus();
-}
+};
