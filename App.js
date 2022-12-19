@@ -1,35 +1,39 @@
+const input0 = document.querySelector("#zero");
+const input1 = document.querySelector("#one");
+const input2 = document.querySelector("#two");
+const input3 = document.querySelector("#three");
+const input4 = document.querySelector("#four");
+const input5 = document.querySelector("#five");
 
-const input = document.querySelectorAll('.otp-input');
-// console.log(input)
+const inputs = [input0, input1, input2, input3, input4, input5];
 
-input.forEach((item) => {
-    item.addEventListener('keyup', onInputChange);
-    // console.log(item)
-})
+const moveFocusToNextInput = (eventOriginationInputNumber) => {
+  if (eventOriginationInputNumber === 5) {
+    return;
+  }
 
-function onInputChange(event) {
-    const inputNum = parseInt(event.target.getAttribute("data-number"));
-
-    if (event.key == "Backspace") {
-        moveFocusToPreviousInput(inputNum);
-        return;
-    }
-
-    moveFocusToNextInput(inputNum);
-}
-
-function moveFocusToNextInput(eventOrigination) {
-    if (eventOrigination === 5) {
-        return;
-    }
-
-    input[eventOrigination + 1].focus();
+  inputs[eventOriginationInputNumber + 1].focus();
 };
 
-function moveFocusToPreviousInput(eventOrigination) {
-    if (eventOrigination === 0) {
-        return;
-    }
+const moveFocusToPreviousInput = (eventOriginationInputNumber) => {
+  if (eventOriginationInputNumber === 0) {
+    return;
+  }
 
-    input[eventOrigination - 1].focus();
+  inputs[eventOriginationInputNumber - 1].focus();
 };
+
+const onInputChange = (event) => {
+  const inputNumber = parseInt(event.target.getAttribute("data-number"));
+
+  if (event.key === "Backspace") {
+    moveFocusToPreviousInput(inputNumber);
+    return;
+  }
+
+  moveFocusToNextInput(inputNumber);
+};
+
+inputs.forEach((input) => {
+  input.addEventListener("keyup", onInputChange);
+});
